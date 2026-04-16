@@ -1,0 +1,13 @@
+services:
+  backend:
+    container_name: "backend"
+    build:
+      context: .
+      dockerfile: ./apps/backend/Dockerfile
+    command: sh -c "bun install && bun run --cwd ./apps/backend dev"
+    ports:
+      - 3000:3000
+    volumes:
+      - ./apps/backend:/app/apps/backend
+      - ./node_modules:/app/node_modules
+      - ./packages:/app/packages

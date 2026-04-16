@@ -1,0 +1,21 @@
+{
+  "name": "cs-trade-platform",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "backend:dev": "bun run --cwd apps/backend dev",
+    "backend:build": "docker build -f ./apps/backend/Dockerfile -t backend .",
+    "backend:start": "docker run --rm backend",
+    "services:up": "docker compose up -d",
+    "services:down": "docker compose down"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.0",
+    "typescript": "5.7.3",
+    "lefthook": "^1.11.0"
+  }
+}
