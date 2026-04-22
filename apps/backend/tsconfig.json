@@ -2,7 +2,12 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "types": ["bun"]
+    "types": ["bun"],
+    "baseUrl": "./",
+    "paths": {
+      "@domain": ["src/domain/index.ts"],
+      "@domain/*": ["src/domain/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "../../packages/shared" }]
