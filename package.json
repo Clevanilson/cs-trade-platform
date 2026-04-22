@@ -10,6 +10,7 @@
     "backend:dev": "bun run --cwd apps/backend dev",
     "backend:build": "docker build -f ./apps/backend/Dockerfile -t backend .",
     "backend:start": "docker run --rm backend",
+    "backend:test": "docker build -f ./apps/backend/Dockerfile -t backend . && docker run --rm backend bun test",
     "services:up": "docker compose up -d",
     "services:down": "docker compose down"
   },
