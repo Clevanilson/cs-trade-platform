@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from "bun:test";
-import { User, UserBuilder } from "./user";
+import { User, type UserBuilder } from "./user";
 
 describe("User Entity", () => {
   let sutBuilder: UserBuilder;
