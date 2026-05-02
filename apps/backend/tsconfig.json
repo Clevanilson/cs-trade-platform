@@ -6,7 +6,8 @@
     "baseUrl": "./",
     "paths": {
       "@domain": ["src/domain/index.ts"],
-      "@domain/*": ["src/domain/*"]
+      "@domain/*": ["src/domain/*"],
+      "@infra/*": ["src/infra/*"]
     }
   },
   "include": ["src"],
