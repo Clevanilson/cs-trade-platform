@@ -6,7 +6,8 @@
   "scripts": {
     "start": "bun run src/index.ts",
     "dev": "bun run --hot src/index.ts",
-    "test": "bun test"
+    "test": "bun test",
+    "migrations:create": "bun run src/infra/database/create-migration.ts"
   },
   "dependencies": {
     "@cs-trade-platform/shared": "workspace:0.0.0"
