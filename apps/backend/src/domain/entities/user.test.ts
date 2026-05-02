@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from "bun:test";
-import { User, type UserBuilder } from "./user";
+import type { UserBuilder } from "../dtos/user.dto";
+import { User } from "./user";
 
 describe("User Entity", () => {
   let sutBuilder: UserBuilder;

@@ -1,6 +1,7 @@
-import { Email } from "./email";
-import { Name } from "./name";
-import { Password } from "./password";
+import type { UserBuilder } from "../dtos/user.dto";
+import { Email } from "../value-objects/email";
+import { Name } from "../value-objects/name";
+import { Password } from "../value-objects/password";
 
 export class User {
   private readonly _id?: string;
@@ -37,10 +38,3 @@ export class User {
     return this._password.compare(password);
   }
 }
-
-export type UserBuilder = {
-  id?: string;
-  name: string;
-  email: string;
-  password: string;
-};
