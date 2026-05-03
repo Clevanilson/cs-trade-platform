@@ -1,6 +1,6 @@
+import { type HttpMethod, HttpStatus } from "@cs-trade-platform/shared";
 import type { Server } from "bun";
 import type { HttpCallback } from "./http-callback";
-import type { HttpMethod } from "./http-method";
 import type { HttpServer } from "./http-server";
 
 type Route = {
@@ -43,11 +43,11 @@ export class BunHttpServer implements HttpServer {
 
   private async handleRequest(request: Request): Promise<Response> {
     const url = new URL(request.url);
-    const method = request.method.toLowerCase() as HttpMethod;
+    const method = request.method.toUpperCase() as HttpMethod;
     const pathname = url.pathname;
     const route = this.findRoute(method, pathname);
     if (!route) {
-      return new Response("Not Found", { status: 404 });
+      return new Response(null, { status: HttpStatus.NOT_FOUND });
     }
     const params = this.getParams(route, pathname);
     const query = this.getQuery(url);

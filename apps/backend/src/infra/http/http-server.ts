@@ -1,4 +1,4 @@
-import type { HttpMethod } from "./http-method";
+import type { HttpMethod } from "@cs-trade-platform/shared";
 import type { HttpCallback } from "./http-callback";
 
 export interface HttpServer {
