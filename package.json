@@ -10,6 +10,7 @@
     "lint": "biome lint .",
     "lint:fix": "biome lint . --write",
     "test": "bun test",
+    "test:watch": "bun test --watch",
     "backend:dev": "bun run --cwd apps/backend dev",
     "backend:build": "docker build -f ./apps/backend/Dockerfile -t backend .",
     "backend:start": "docker run --rm backend",
