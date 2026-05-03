@@ -1,5 +1,6 @@
 import { HELLO_WORLD } from "@cs-trade-platform/shared";
 import { SQLiteAdapter } from "./infra/database";
+import { BunHttpServer, HttpMethod, HttpStatus } from "./infra/http";
 
 const db = new SQLiteAdapter();
 
@@ -11,26 +12,26 @@ await db.query(`
   )
 `);
 
-const server = Bun.serve({
-  port: process.env.PORT || 3000,
-  async fetch(req) {
-    const url = new URL(req.url);
+const httpServer = new BunHttpServer();
 
-    if (url.pathname === "/save") {
-      const randomNumber = Math.random();
-      await db.query("INSERT INTO test_table (value) VALUES (?)", [
-        randomNumber,
-      ]);
-      return Response.json({ message: "Saved!", value: randomNumber });
-    }
-
-    if (url.pathname === "/") {
-      const results = await db.query("SELECT * FROM test_table");
-      return Response.json({ hello: HELLO_WORLD, data: results });
-    }
-
-    return new Response("Not Found", { status: 404 });
-  },
+httpServer.register(HttpMethod.GET, "/save", async () => {
+  const randomNumber = Math.random();
+  await db.query("INSERT INTO test_table (value) VALUES (?)", [randomNumber]);
+  return {
+    status: HttpStatus.OK,
+    data: { message: "Saved!", value: randomNumber },
+  };
 });
 
-console.log(`Backend listening on http://localhost:${server.port}`);
+httpServer.register(HttpMethod.GET, "/", async () => {
+  const results = await db.query("SELECT * FROM test_table");
+  return {
+    status: HttpStatus.OK,
+    data: { hello: HELLO_WORLD, data: results },
+  };
+});
+
+const port = Number(process.env.PORT) || 3000;
+await httpServer.start(port);
+
+console.log(`Backend listening on http://localhost:${port}`);
