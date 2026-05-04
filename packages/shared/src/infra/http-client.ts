@@ -1,5 +1,10 @@
 import type { HttpMethod } from "./http-method";
+import type { HttpResponse } from "./http-response";
 
 export interface HttpClient {
-  request(method: HttpMethod, endpoint: string, body?: any): Promise<any>;
+  request<TData = unknown>(
+    method: HttpMethod,
+    endpoint: string,
+    body?: unknown,
+  ): Promise<HttpResponse<TData>>;
 }
