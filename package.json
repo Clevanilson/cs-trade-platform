@@ -2,14 +2,13 @@
   "name": "cs-trade-platform",
   "version": "0.0.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": ["apps/*", "packages/*"],
   "scripts": {
-    "lint": "biome lint .",
-    "lint:fix": "biome lint . --write",
-    "test": "bun test",
+    "lint": "docker run --rm backend bun biome lint .",
+    "lint:fix": "docker run --rm backend bun biome lint . --write",
+    "lint:ci": "biome lint .",
+    "test": "docker run --rm backend bun test",
+    "test:ci": "bun test",
     "test:watch": "bun test --watch",
     "backend:dev": "bun run --cwd apps/backend dev",
     "backend:build": "docker build -f ./apps/backend/Dockerfile -t backend .",

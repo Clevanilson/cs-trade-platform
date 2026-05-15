@@ -1,6 +1,6 @@
-import { HELLO_WORLD } from "@cs-trade-platform/shared";
+import { HELLO_WORLD, HttpMethod } from "@cs-trade-platform/shared";
 import { SQLiteAdapter } from "./infra/database";
-import { BunHttpServer, HttpMethod, HttpStatus } from "./infra/http";
+import { BunHttpServer, HttpStatus } from "./infra/http";
 
 const db = new SQLiteAdapter();
 

@@ -5,9 +5,9 @@
     "types": ["bun"],
     "baseUrl": "./",
     "paths": {
-      "@domain": ["src/domain/index.ts"],
       "@domain/*": ["src/domain/*"],
-      "@infra/*": ["src/infra/*"]
+      "@infra/*": ["src/infra/*"],
+      "@application/*": ["src/application/*"]
     }
   },
   "include": ["src"],
