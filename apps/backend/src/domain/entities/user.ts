@@ -1,10 +1,7 @@
-import type { UserBuilder } from "../dtos/user.dto";
-import { Email } from "../value-objects/email";
-import { Name } from "../value-objects/name";
-import { Password } from "../value-objects/password";
+import { Email, Name, Password } from "@domain/value-objects";
 
 export class User {
-  private readonly _id?: string;
+  private readonly _id?: number;
   private readonly _name: Name;
   private readonly _email: Email;
   private readonly _password: Password;
@@ -13,12 +10,11 @@ export class User {
     this._id = builder.id;
     this._name = new Name(builder.name);
     this._email = new Email(builder.email);
-    this._password = builder.id
-      ? new Password(builder.password)
-      : Password.create(builder.password);
+    this._password =
+      builder.id !== undefined ? new Password(builder.password) : Password.create(builder.password);
   }
 
-  get id(): string | undefined {
+  get id(): number | undefined {
     return this._id;
   }
 
@@ -38,3 +34,10 @@ export class User {
     return this._password.compare(password);
   }
 }
+
+export type UserBuilder = {
+  id?: number;
+  name: string;
+  email: string;
+  password: string;
+};

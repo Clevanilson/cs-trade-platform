@@ -1,6 +1,5 @@
 import { beforeEach, describe, expect, it } from "bun:test";
-import type { UserBuilder } from "../dtos/user.dto";
-import { User } from "./user";
+import { User, type UserBuilder } from "./user";
 
 describe("User Entity", () => {
   let sutBuilder: UserBuilder;
@@ -15,7 +14,7 @@ describe("User Entity", () => {
   });
 
   it("should create an existing user with a pre-hashed password", () => {
-    sutBuilder.id = "123";
+    sutBuilder.id = 123;
     sutBuilder.password = "$argon2id$v=19$m=65536,t=2,p=1$hashedpassword";
     const sut = new User(sutBuilder);
     expect(sut.password).toBe(sutBuilder.password);
