@@ -1,5 +1,5 @@
 {
-  "name": "@cs-trade-platform/shared",
+  "name": "@cs-trade-platform/domain",
   "version": "0.0.0",
   "private": true,
   "type": "module",

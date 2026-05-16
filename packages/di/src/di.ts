@@ -24,6 +24,10 @@ class DI {
     }
     return value as TValue;
   }
+
+  clear(): void {
+    this.container.clear();
+  }
 }
 
 export const di = DI.getInstance();

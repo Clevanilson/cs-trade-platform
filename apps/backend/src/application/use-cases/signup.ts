@@ -1,5 +1,6 @@
 import { USERS_REPOSITORY_TOKEN } from "@application/repositories";
 import { di } from "@cs-trade-platform/di";
+import { DomainError } from "@cs-trade-platform/domain";
 import { User } from "@domain/entities";
 
 export type SignupInput = {
@@ -18,7 +19,7 @@ export class Signup {
   async execute(input: SignupInput): Promise<SignupOutput> {
     const existingUser = await this._usersrepository.getByEmail(input.email);
     if (existingUser) {
-      throw new Error("User already exists");
+      throw new DomainError({ message: "User already exists" });
     }
     const user = new User({
       name: input.name,

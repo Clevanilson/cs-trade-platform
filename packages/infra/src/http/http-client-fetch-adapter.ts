@@ -2,7 +2,7 @@ import type { HttpClient } from "./http-client";
 import type { HttpMethod } from "./http-method";
 import type { HttpResponse } from "./http-response";
 
-export class HttpClientPromiseAdapter implements HttpClient {
+export class HttpClientFetchAdapter implements HttpClient {
   async request<TData = unknown>(
     method: HttpMethod,
     endpoint: string,

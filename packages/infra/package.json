@@ -1,0 +1,17 @@
+{
+  "name": "@cs-trade-platform/infra",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@cs-trade-platform/domain": "workspace:*",
+    "@cs-trade-platform/di": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}

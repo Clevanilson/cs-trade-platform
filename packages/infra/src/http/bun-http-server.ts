@@ -1,7 +1,10 @@
-import { type HttpMethod, HttpStatus } from "@cs-trade-platform/shared";
+import { DomainError } from "@cs-trade-platform/domain";
 import type { Server } from "bun";
 import type { HttpCallback } from "./http-callback";
+import type { HttpMethod } from "./http-method";
+import type { HttpResponse } from "./http-response";
 import type { HttpServer } from "./http-server";
+import { HttpStatus } from "./http-status";
 
 type Route = {
   method: HttpMethod;
@@ -15,6 +18,7 @@ export class BunHttpServer implements HttpServer {
   private server?: Server<undefined>;
 
   register(method: HttpMethod, endpoint: string, callback: HttpCallback): void {
+    console.log(`${method} ${endpoint}`);
     const paramNames: string[] = [];
     const regexPath = endpoint
       .replace(/:([^/]+)/g, (_, paramName) => {
@@ -46,13 +50,27 @@ export class BunHttpServer implements HttpServer {
     const method = request.method.toUpperCase() as HttpMethod;
     const pathname = url.pathname;
     const route = this.findRoute(method, pathname);
-    if (!route) {
-      return new Response(null, { status: HttpStatus.NOT_FOUND });
-    }
+    if (!route) return new Response(null, { status: HttpStatus.NOT_FOUND });
     const params = this.getParams(route, pathname);
     const query = this.getQuery(url);
-    const output = await route.callback({ params, query });
-    return Response.json(output.data || null, { status: output.status });
+    let body = {};
+    try {
+      body = await request.json();
+    } catch (e) {
+      // Body is not JSON or empty
+    }
+    try {
+      const output = await route.callback({ params, query, body });
+      return Response.json(output.data || null, { status: output.status });
+    } catch (error: unknown) {
+      if (error instanceof DomainError) {
+        return Response.json({ message: error.message }, { status: HttpStatus.BAD_REQUEST });
+      }
+      const response = { message: "Internal server error " };
+      const options = { status: HttpStatus.INTERNAL_SERVER_ERROR };
+      console.error(error);
+      return Response.json(response, options);
+    }
   }
 
   private findRoute(method: HttpMethod, pathname: string): Route | undefined {
