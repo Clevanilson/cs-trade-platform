@@ -14,16 +14,32 @@
       "name": "@cs-trade-platform/backend",
       "version": "0.0.0",
       "dependencies": {
-        "@cs-trade-platform/shared": "workspace:0.0.0",
+        "@cs-trade-platform/di": "workspace:*",
+        "@cs-trade-platform/domain": "workspace:*",
+        "@cs-trade-platform/infra": "workspace:0.0.0",
       },
       "devDependencies": {
         "@types/bun": "latest",
         "typescript": "5.7.3",
       },
     },
-    "packages/shared": {
-      "name": "@cs-trade-platform/shared",
+    "packages/di": {
+      "name": "@cs-trade-platform/di",
       "version": "0.0.0",
+    },
+    "packages/domain": {
+      "name": "@cs-trade-platform/domain",
+      "version": "0.0.0",
+    },
+    "packages/infra": {
+      "name": "@cs-trade-platform/infra",
+      "version": "0.0.0",
+      "dependencies": {
+        "@cs-trade-platform/domain": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/bun": "latest",
+      },
     },
   },
   "packages": {
@@ -47,13 +63,17 @@
 
     "@cs-trade-platform/backend": ["@cs-trade-platform/backend@workspace:apps/backend"],
 
-    "@cs-trade-platform/shared": ["@cs-trade-platform/shared@workspace:packages/shared"],
+    "@cs-trade-platform/di": ["@cs-trade-platform/di@workspace:packages/di"],
 
-    "@types/bun": ["@types/bun@1.3.12", "", { "dependencies": { "bun-types": "1.3.12" } }, "sha512-DBv81elK+/VSwXHDlnH3Qduw+KxkTIWi7TXkAeh24zpi5l0B2kUg9Ga3tb4nJaPcOFswflgi/yAvMVBPrxMB+A=="],
+    "@cs-trade-platform/domain": ["@cs-trade-platform/domain@workspace:packages/domain"],
+
+    "@cs-trade-platform/infra": ["@cs-trade-platform/infra@workspace:packages/infra"],
+
+    "@types/bun": ["@types/bun@1.3.14", "", { "dependencies": { "bun-types": "1.3.14" } }, "sha512-h1hFqFVcvAvD9j9K7ZW7vd82aSA+rTdznZa+5bwvCwqSB1jmmfLcbIWhOLx1/+boy/xmjgCs/OMUL8hRJSmnPw=="],
 
     "@types/node": ["@types/node@25.6.0", "", { "dependencies": { "undici-types": "~7.19.0" } }, "sha512-+qIYRKdNYJwY3vRCZMdJbPLJAtGjQBudzZzdzwQYkEPQd+PJGixUL5QfvCLDaULoLv+RhT3LDkwEfKaAkgSmNQ=="],
 
-    "bun-types": ["bun-types@1.3.12", "", { "dependencies": { "@types/node": "*" } }, "sha512-HqOLj5PoFajAQciOMRiIZGNoKxDJSr6qigAttOX40vJuSp6DN/CxWp9s3C1Xwm4oH7ybueITwiaOcWXoYVoRkA=="],
+    "bun-types": ["bun-types@1.3.14", "", { "dependencies": { "@types/node": "*" } }, "sha512-4N0ig0fEomHt5R0KCFWjovxow98rIoRwKolrYdCcknNwMekCXRnWEUvgu5soYV8QXtVsrUD8B95MBOZGPvr6KQ=="],
 
     "lefthook": ["lefthook@1.13.6", "", { "optionalDependencies": { "lefthook-darwin-arm64": "1.13.6", "lefthook-darwin-x64": "1.13.6", "lefthook-freebsd-arm64": "1.13.6", "lefthook-freebsd-x64": "1.13.6", "lefthook-linux-arm64": "1.13.6", "lefthook-linux-x64": "1.13.6", "lefthook-openbsd-arm64": "1.13.6", "lefthook-openbsd-x64": "1.13.6", "lefthook-windows-arm64": "1.13.6", "lefthook-windows-x64": "1.13.6" }, "bin": { "lefthook": "bin/index.js" } }, "sha512-ojj4/4IJ29Xn4drd5emqVgilegAPN3Kf0FQM2p/9+lwSTpU+SZ1v4Ig++NF+9MOa99UKY8bElmVrLhnUUNFh5g=="],
 

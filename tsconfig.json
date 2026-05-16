@@ -8,6 +8,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "composite": true,
-    "declaration": true
+    "declaration": true,
+    "types": ["bun"]
   }
 }

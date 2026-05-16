@@ -4,18 +4,20 @@
   "private": true,
   "workspaces": ["apps/*", "packages/*"],
   "scripts": {
-    "lint": "docker run --rm backend bun biome lint .",
-    "lint:fix": "docker run --rm backend bun biome lint . --write",
+    "lint": "docker run --rm -v $(pwd):/app app bun biome lint .",
+    "lint:fix": "docker run --rm -v $(pwd)/:app app bun biome lint . --write",
     "lint:ci": "biome lint .",
-    "test": "docker run --rm backend bun test",
+    "test": "docker run --rm -v $(pwd):/app app bun test",
     "test:ci": "bun test",
-    "test:watch": "bun test --watch",
+    "test:watch": "docker run --rm -v $(pwd):/app app bun test --watch",
     "backend:dev": "bun run --cwd apps/backend dev",
     "backend:build": "docker build -f ./apps/backend/Dockerfile -t backend .",
     "backend:start": "docker run --rm backend",
     "backend:test": "docker build -f ./apps/backend/Dockerfile -t backend . && docker run --rm backend bun test",
     "services:up": "docker compose up -d",
-    "services:down": "docker compose down"
+    "services:down": "docker compose down",
+    "build:workspace": "docker build -t app .",
+    "run:workspace": "docker run --rm -v $(pwd)/app app"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.0",
